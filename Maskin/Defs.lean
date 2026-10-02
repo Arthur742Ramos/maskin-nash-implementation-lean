@@ -86,11 +86,4 @@ theorem maskin_necessity (F : Profile n A → Set A)
   have hrel : (P i).rel (out m) b := hEq i hb
   rwa [hm] at hrel
 
-theorem maskin_sufficiency (hn : 3 ≤ n) (F : Profile n A → Set A)
-    (hF : ∀ P, (F P).Nonempty) :
-    MaskinMonotone F → NoVetoPower n F →
-      ∃ (Msg : (i : Fin n) → Type) (out : ((i : Fin n) → Msg i) → A),
-        NashImplements F Msg out := by
-  sorry
-
 end Maskin

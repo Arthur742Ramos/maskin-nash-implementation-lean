@@ -41,7 +41,7 @@ theorem canonOutcome_rule3 (F : Profile n A → Set A)
   unfold canonOutcome
   rw [dite_eq_right hNot1, dite_eq_right hNot2, dite_eq_left hn]
 
-private theorem exists_fin_ne_two (hn : 3 ≤ n) (j j' : Fin n) :
+theorem exists_fin_ne_two (hn : 3 ≤ n) (j j' : Fin n) :
     ∃ i : Fin n, i ≠ j ∧ i ≠ j' := by
   by_cases h0 : 0 ≠ j.val ∧ 0 ≠ j'.val
   · refine ⟨⟨0, by omega⟩, ?_, ?_⟩
