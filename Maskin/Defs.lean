@@ -74,7 +74,17 @@ theorem maskin_necessity (F : Profile n A → Set A)
     (hF : ∀ P, (F P).Nonempty) (Msg : (i : Fin n) → Type)
     (out : ((i : Fin n) → Msg i) → A) :
     NashImplements F Msg out → MaskinMonotone F := by
-  sorry
+  intro h P P_ a ha hmono
+  rw [← h P] at ha
+  rcases ha with ⟨m, hEq, hm⟩
+  rw [← h P_]
+  refine ⟨m, ?_, hm⟩
+  intro i b hb
+  change (P_ i).rel (out m) b
+  rw [hm]
+  apply hmono i b
+  have hrel : (P i).rel (out m) b := hEq i hb
+  rwa [hm] at hrel
 
 theorem maskin_sufficiency (hn : 3 ≤ n) (F : Profile n A → Set A)
     (hF : ∀ P, (F P).Nonempty) :
