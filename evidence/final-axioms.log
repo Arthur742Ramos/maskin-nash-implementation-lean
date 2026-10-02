@@ -1,0 +1,11 @@
+'Maskin.maskin_necessity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Maskin.maskin_sufficiency' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Maskin.Profile' does not depend on any axioms
+'Maskin.lowerContour' does not depend on any axioms
+'Maskin.MaskinMonotone' does not depend on any axioms
+'Maskin.NoVetoPower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Maskin.CanonMsg' does not depend on any axioms
+'Maskin.canonOutcome' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Maskin.attainable' does not depend on any axioms
+'Maskin.IsNashEq' does not depend on any axioms
+'Maskin.NashImplements' does not depend on any axioms

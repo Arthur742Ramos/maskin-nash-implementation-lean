@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Build the proof library and both comparison targets, then verify the package.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+export PATH="$HOME/.elan/bin:$PATH"
+export LAKE_HOME="$HOME/.elan/toolchains/leanprover--lean4---v4.35.0-rc2"
+
+echo "== lake build =="
+lake build Maskin Challenge Solution
+
+echo "== sorry audit (library must be placeholder-free) =="
+if rg -n '\b(sorry|sorryAx|admit)\b' Maskin.lean Maskin/; then
+  echo "FAIL: placeholder found in library"
+  exit 1
+fi
+echo "OK: no placeholders in library"
+
+echo "== Challenge regeneration check =="
+cp Challenge.lean /tmp/maskin-verify-challenge-before.lean
+python3 scripts/make_challenge.py
+if ! cmp -s Challenge.lean /tmp/maskin-verify-challenge-before.lean; then
+  echo "FAIL: Challenge.lean was not the generator output; regenerated in place"
+  exit 1
+fi
+echo "OK: Challenge.lean matches generator output"
+
+echo "== package shape check =="
+python3 scripts/check_package.py
+
+echo "== Palomar comparator replica =="
+./scripts/verify-palomar.sh
+
+echo "== metadata check =="
+python3 scripts/verify_metadata.py
+
+echo "== verification passed =="

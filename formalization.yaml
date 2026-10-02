@@ -1,11 +1,94 @@
+version: "v0.4"
 project:
-  name: maskin-nash-implementation-lean
+  name: "maskin-nash-implementation-lean"
+  description: >-
+    Lean 4 formalization of Maskin's theorem on Nash implementation:
+    necessity of Maskin monotonicity and sufficiency of monotonicity plus
+    no-veto power via the canonical mechanism. Alternatives form a finite
+    nonempty type, agents are indexed by Fin n, preferences are complete
+    preorders, and the social choice correspondence is nonempty-valued.
+    Sufficiency requires at least three agents; implementation is in pure
+    strategies.
   authors:
-    - Arthur Freitas Ramos
-    - David Barros Hulak
-    - Ruy Jose Guerra Barretto de Queiroz
+    - "Arthur Freitas Ramos"
+    - "David Barros Hulak"
+    - "Ruy Jose Guerra Barretto de Queiroz"
   responsible_maintainers:
-    - Arthur Freitas Ramos
-    - David Barros Hulak
-    - Ruy Jose Guerra Barretto de Queiroz
-  description: A work in progress Lean 4 formalization of Maskin theorem on Nash implementation.
+    - "Arthur Freitas Ramos"
+    - "David Barros Hulak"
+    - "Ruy Jose Guerra Barretto de Queiroz"
+  license: "BSD-3-Clause"
+repository:
+  role: "substantive-development"
+classification:
+  arxiv: ["cs.GT", "econ.TH"]
+  msc2020: ["91B26"]
+sources:
+  - title: "Nash Equilibrium and Welfare Optimality"
+    authors: ["Eric Maskin"]
+    type: "paper"
+    year: 1999
+    url: "https://doi.org/10.1111/1467-937X.00099"
+    relationship: "formalizes"
+    note: >-
+      The selected contracts formalize the necessity and sufficiency
+      directions of Maskin's Nash implementation theorem for the finite
+      model defined in Maskin/Defs.lean. Sufficiency constructs the
+      canonical mechanism in Maskin/Sufficiency.lean; its Rule 2 includes
+      the admissibility condition a ∈ F P and Rule 3 uses a modulo game.
+    author_endorsement: "not-contacted"
+automation:
+  methods:
+    - method: "AI-assisted Lean proof development"
+      system: "OpenAI Codex"
+      role: "Source inspection, proof implementation, compilation, placeholder and axiom audits, and package preparation."
+    - method: "Lean tactic automation"
+      role: "simp, omega, classical reasoning, and finite-set cardinality arguments."
+review:
+  status: >-
+    The completed library was reported to build with zero proof placeholders;
+    the two capstone theorems were reported to depend only on propext,
+    Classical.choice, and Quot.sound. The proofs were developed with AI
+    assistance and mechanically checked. This packaging pass performs
+    source inspection without running a build or comparator. The supplied
+    scripts support subsequent package validation; the official comparator
+    checks exact contracts. No separate independent human review of the
+    proofs was performed.
+  human_review: "No independent human review of the proofs or original-author endorsement is claimed."
+  limitations: >-
+    Finite nonempty alternatives with [Fintype A] [Nonempty A] [DecidableEq A],
+    finitely many agents indexed by Fin n, complete-preorder preferences,
+    a nonempty-valued correspondence (hF : ∀ P, (F P).Nonempty), and
+    pure-strategy Nash implementation. Sufficiency requires (hn : 3 ≤ n).
+    The existential sufficiency contract does not itself name the mechanism;
+    its proof supplies CanonMsg n A and canonOutcome n A F.
+alignment:
+  statements:
+    - lean: "Maskin.maskin_necessity"
+      description: >-
+        Under {n : Nat} {A : Type} [Fintype A] [Nonempty A] [DecidableEq A],
+        the exact binders are (F : Profile n A → Set A)
+        (hF : ∀ P, (F P).Nonempty) (Msg : (i : Fin n) → Type)
+        (out : ((i : Fin n) → Msg i) → A). The conclusion is
+        NashImplements F Msg out → MaskinMonotone F: if this mechanism
+        Nash-implements F, then F is Maskin-monotone. No lower bound on n
+        is stated in this direction.
+    - lean: "Maskin.maskin_sufficiency"
+      description: >-
+        Under {n : Nat} {A : Type} [Fintype A] [Nonempty A] [DecidableEq A],
+        the exact binders are (hn : 3 ≤ n) (F : Profile n A → Set A)
+        (hF : ∀ P, (F P).Nonempty). The conclusion is
+        MaskinMonotone F → NoVetoPower n F →
+        ∃ (Msg : (i : Fin n) → Type) (out : ((i : Fin n) → Msg i) → A),
+        NashImplements F Msg out. Thus monotonicity and no-veto power
+        suffice for existence of a Nash-implementing mechanism; the proof
+        chooses the canonical message space and outcome function.
+related_formalizations:
+  - id: "palomar-registry-search-2026-10-02"
+    title: "Dated Palomar registry search for Maskin implementation"
+    relationship: "none-found-in-registry-search"
+    note: >-
+      The Palomar registry search performed on 2026-10-02 (405 results,
+      326 projects, revision 114) found no existing Maskin implementation
+      entries. This records only that dated registry search and makes no
+      claim about formalizations outside its results.

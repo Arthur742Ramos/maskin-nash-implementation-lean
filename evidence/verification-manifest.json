@@ -1,0 +1,22 @@
+{
+  "source_files_sha256": {
+    "Challenge.lean": "114c6c9f9ffb52fd2c5e57165a3a4febb33add1212e90f44814eb19ad693e28d",
+    "Maskin/Defs.lean": "3110565dc2b2245c7c78d7f8362cdef97bd0607229fe9f704b145bf97e6f9d81",
+    "Maskin/Helpers.lean": "f0710164ced036c48e6cb717c9cf8845cbb1f56e26a90d6be0e834b771399ee7",
+    "Maskin/Sufficiency.lean": "4ca3f76ffcb5572927a768a2f5e156e628c4f971fe5bc62ecae48f680f847914",
+    "Maskin.lean": "da03872b769d20c2601853c7af88232e0ef50090d25551616638ac7c7c920ecb",
+    "Solution.lean": "9e1211276d41b086ffecda333f8dd6f8c2efac513f8bec76d45985929c459795",
+    "comparator.json": "6675afbdaf8c24b634f04e070461769b382e19a2fa1e1323525e453b62d4b25e",
+    "lake-manifest.json": "8df07ab5f0a6104a2fb5f33d4055b60383c600830301468ce1a1b68165d60926",
+    "lakefile.lean": "fe8824153a18e419e2442bdadfb7393d84bd6f077a48dc5255fcc162c93a1f49",
+    "lean-toolchain": "8dc8d6f560141069d9073e370611716ef77ada0da8ffa37e2149f44b2e63ac7a"
+  },
+  "lean": "leanprover/lean4:v4.35.0-rc2",
+  "mathlib": "065356127b1dc0016f66b7283ce0ce2c4055aa55",
+  "comparison": "two exact theorem statements with named Challenge holes; nine genuine unchanged definitions; complete Solution proofs",
+  "verification_kernels": [
+    "Lean default"
+  ],
+  "recorded_at_utc": "2026-10-02T11:21:14.426752+00:00",
+  "local_platform": "Linux-7.0.0-39-generic-x86_64-with-glibc2.39"
+}

@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": ["Maskin.maskin_necessity", "Maskin.maskin_sufficiency"],
+  "definition_names": [
+    "Maskin.Profile",
+    "Maskin.lowerContour",
+    "Maskin.MaskinMonotone",
+    "Maskin.NoVetoPower",
+    "Maskin.CanonMsg",
+    "Maskin.canonOutcome",
+    "Maskin.attainable",
+    "Maskin.IsNashEq",
+    "Maskin.NashImplements"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

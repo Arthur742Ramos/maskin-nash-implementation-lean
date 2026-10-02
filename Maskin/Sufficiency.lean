@@ -1,5 +1,10 @@
-import Maskin.Helpers
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Maskin.Defs
+public import Maskin.Helpers
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+
+@[expose] public section
 
 namespace Maskin
 
@@ -271,3 +276,5 @@ theorem maskin_sufficiency (hn : 3 ≤ n) (F : Profile n A → Set A)
         exact (P j).refl a
 
 end Maskin
+
+end

@@ -1,5 +1,9 @@
-import Maskin.Defs
+module
+
+public import Maskin.Defs
 import Lean.Elab.Tactic.Omega
+
+@[expose] public section
 
 namespace Maskin
 
@@ -162,3 +166,5 @@ theorem spoiler_profile {n : Nat} {A : Type} (x y : A) (hxy : y ≠ x)
     exact hTied hj.symm
 
 end Maskin
+
+end
