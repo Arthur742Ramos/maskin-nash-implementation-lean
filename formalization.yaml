@@ -1,0 +1,11 @@
+project:
+  name: maskin-nash-implementation-lean
+  authors:
+    - Arthur Freitas Ramos
+    - David Barros Hulak
+    - Ruy Jose Guerra Barretto de Queiroz
+  responsible_maintainers:
+    - Arthur Freitas Ramos
+    - David Barros Hulak
+    - Ruy Jose Guerra Barretto de Queiroz
+  description: A work in progress Lean 4 formalization of Maskin theorem on Nash implementation.
