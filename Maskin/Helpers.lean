@@ -11,10 +11,10 @@ def Rule1Cond (F : Profile n A → Set A) (m : (i : Fin n) → CanonMsg n A) : P
   ∃ (a : A) (P : Profile n A),
     (∀ i : Fin n, (m i).1 = a ∧ (m i).2.1 = P) ∧ a ∈ F P
 
-def Rule2Cond (_F : Profile n A → Set A) (m : (i : Fin n) → CanonMsg n A) : Prop :=
+def Rule2Cond (F : Profile n A → Set A) (m : (i : Fin n) → CanonMsg n A) : Prop :=
   ∃ (j : Fin n) (a : A) (P : Profile n A),
     (∀ i : Fin n, i ≠ j → (m i).1 = a ∧ (m i).2.1 = P) ∧
-      ¬ ((m j).1 = a ∧ (m j).2.1 = P)
+      ¬ ((m j).1 = a ∧ (m j).2.1 = P) ∧ a ∈ F P
 
 theorem canonOutcome_rule1 (F : Profile n A → Set A)
     (m : (i : Fin n) → CanonMsg n A) (a : A) (P : Profile n A)
@@ -82,25 +82,26 @@ theorem canonOutcome_rule2 (hn : 3 ≤ n) (F : Profile n A → Set A)
     (m : (i : Fin n) → CanonMsg n A) (j : Fin n) (a : A) (P : Profile n A)
     (hAgree : ∀ i, i ≠ j → (m i).1 = a ∧ (m i).2.1 = P)
     (hDiff : ¬ ((m j).1 = a ∧ (m j).2.1 = P))
+    (ha : a ∈ F P)
     (hNot1 : ¬ Rule1Cond F m) :
     canonOutcome n A F m =
       if (m j).1 ∈ lowerContour P j a then (m j).1 else a := by
   classical
-  have h2 : Rule2Cond F m := ⟨j, a, P, hAgree, hDiff⟩
+  have h2 : Rule2Cond F m := ⟨j, a, P, hAgree, hDiff, ha⟩
   unfold Rule2Cond at h2
   let j0 := Classical.choose h2
   let a0 := Classical.choose (Classical.choose_spec h2)
   let P0 := Classical.choose (Classical.choose_spec (Classical.choose_spec h2))
   have h0 : (∀ i, i ≠ j0 → (m i).1 = a0 ∧ (m i).2.1 = P0) ∧
-      ¬ ((m j0).1 = a0 ∧ (m j0).2.1 = P0) :=
+      ¬ ((m j0).1 = a0 ∧ (m j0).2.1 = P0) ∧ a0 ∈ F P0 :=
     Classical.choose_spec (Classical.choose_spec (Classical.choose_spec h2))
-  obtain ⟨hj, ha, hP⟩ :=
-    rule2_witness_unique hn F m j0 j a0 a P0 P h0.1 h0.2 hAgree hDiff
+  obtain ⟨hj, haEq, hP⟩ :=
+    rule2_witness_unique hn F m j0 j a0 a P0 P h0.1 h0.2.1 hAgree hDiff
   unfold Rule1Cond at hNot1
   unfold canonOutcome
   rw [dite_eq_right hNot1, dite_eq_left h2]
   change (if (m j0).1 ∈ lowerContour P0 j0 a0 then (m j0).1 else a0) = _
-  rw [hj, ha, hP]
+  rw [hj, haEq, hP]
 
 theorem modulo_winner (n : Nat) (hn : 0 < n) (k : Fin n) (S : Nat) :
     ∃ z : Fin n, (z.val + S) % n = k.val := by

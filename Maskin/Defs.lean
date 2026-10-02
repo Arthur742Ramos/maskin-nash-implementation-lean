@@ -44,7 +44,7 @@ noncomputable def canonOutcome (n : Nat) (A : Type)
       Classical.choose h₁
     else if h₂ : ∃ (j : Fin n) (a : A) (P : Profile n A),
         (∀ i : Fin n, i ≠ j → (m i).1 = a ∧ (m i).2.1 = P) ∧
-          ¬ ((m j).1 = a ∧ (m j).2.1 = P) then
+          ¬ ((m j).1 = a ∧ (m j).2.1 = P) ∧ a ∈ F P then
       let j := Classical.choose h₂
       let a := Classical.choose (Classical.choose_spec h₂)
       let P := Classical.choose (Classical.choose_spec (Classical.choose_spec h₂))
